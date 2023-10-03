@@ -1,0 +1,28 @@
+
+library(tidyverse)
+
+
+dlist <- read.csv("listings.csv.gz")
+
+head(dlist)
+
+colnames(dlist)
+
+
+Dlist <- dlist %>%  # creating a dataset with required columns
+  select(id, name,host_id, host_is_superhost, host_neighbourhood, latitude, longitude, property_type, room_type,accommodates,
+         bathrooms_text, bedrooms, beds, price, minimum_nights, number_of_reviews, review_scores_rating,
+         ) %>%
+  distinct()  # removing duplicates if present
+  
+sum(is.na(dlist))
+  
+" " " There are many na values in the data and more than 1000 rows are getting deleted if 
+I use drop_na()function. Therefore I will not do anything with na values. " " "
+
+head(Dlist)
+
+" " " I will convert new dataset to csv format and export it." " "
+
+write.csv(Dlist, "C:\\Users\\nisha\\Desktop\\DA Projects\\Tableau Projects Data\\dallas_listings.csv", row.names = FALSE)
+
